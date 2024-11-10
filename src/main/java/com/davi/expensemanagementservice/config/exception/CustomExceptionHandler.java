@@ -1,6 +1,7 @@
 package com.davi.expensemanagementservice.config.exception;
 
 import com.davi.expensemanagementservice.exception.CategoryNotFoundException;
+import com.davi.expensemanagementservice.exception.ExpenseNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,6 +20,11 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Map<String, String>> handleCategoryNotFoundException(CategoryNotFoundException e) {
+        return new ResponseEntity<>(response(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Map<String, String>> handleExpenseNotFoundException(ExpenseNotFoundException e) {
         return new ResponseEntity<>(response(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 }
