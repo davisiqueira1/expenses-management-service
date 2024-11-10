@@ -18,7 +18,7 @@ public class ExpenseController {
     @PostMapping("/add")
     public ResponseEntity<Expense> create(@RequestBody Expense expense) {
         Expense newExpense = expenseService.create(expense);
-        return new ResponseEntity<>(newExpense, HttpStatus.OK);
+        return new ResponseEntity<>(newExpense, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
