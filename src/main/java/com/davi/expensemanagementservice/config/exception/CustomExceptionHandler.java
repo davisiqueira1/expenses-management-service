@@ -1,5 +1,6 @@
 package com.davi.expensemanagementservice.config.exception;
 
+import com.davi.expensemanagementservice.exception.AppUserNotFoundException;
 import com.davi.expensemanagementservice.exception.CategoryNotFoundException;
 import com.davi.expensemanagementservice.exception.ExpenseNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,11 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Map<String, String>> handleExpenseNotFoundException(ExpenseNotFoundException e) {
+        return new ResponseEntity<>(response(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Map<String, String>> handleAppUserNotFoundException(AppUserNotFoundException e) {
         return new ResponseEntity<>(response(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 }
