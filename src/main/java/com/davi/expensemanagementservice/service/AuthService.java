@@ -1,6 +1,7 @@
 package com.davi.expensemanagementservice.service;
 
 import com.davi.expensemanagementservice.dtos.SignUpDTO;
+import com.davi.expensemanagementservice.exception.EmailAlreadyExistsException;
 import com.davi.expensemanagementservice.exception.UsernameAlreadyExistsException;
 import com.davi.expensemanagementservice.model.AppUser;
 import com.davi.expensemanagementservice.repository.AppUserRepository;
@@ -29,6 +30,9 @@ public class AuthService implements UserDetailsService {
     public UserDetails signUp(SignUpDTO data) {
         if (appUserRepository.findByUsername(data.username()) != null) {
             throw new UsernameAlreadyExistsException("Username '" + data.username() + "' already exists");
+        }
+        if (appUserRepository.findByEmail(data.email()) != null) {
+            throw new EmailAlreadyExistsException("An account with email '" + data.email() + "' already exists");
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         AppUser appUser = new AppUser(
