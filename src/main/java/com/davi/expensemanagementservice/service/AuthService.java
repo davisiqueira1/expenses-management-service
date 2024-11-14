@@ -33,8 +33,8 @@ public class AuthService implements UserDetailsService {
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         AppUser appUser = new AppUser(
                 data.username(),
-                encryptedPassword,
                 data.name(),
+                encryptedPassword,
                 data.email(),
                 data.role(),
                 data.expenses()
