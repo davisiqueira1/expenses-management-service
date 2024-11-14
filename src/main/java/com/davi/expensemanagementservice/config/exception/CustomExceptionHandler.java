@@ -2,10 +2,7 @@ package com.davi.expensemanagementservice.config.exception;
 
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.davi.expensemanagementservice.exception.AppUserNotFoundException;
-import com.davi.expensemanagementservice.exception.CategoryNotFoundException;
-import com.davi.expensemanagementservice.exception.ExpenseNotFoundException;
-import com.davi.expensemanagementservice.exception.UsernameAlreadyExistsException;
+import com.davi.expensemanagementservice.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -49,6 +46,11 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Map<String, String>> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException e) {
-        return new ResponseEntity<>(response(e.getMessage()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(response(e.getMessage()), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Map<String, String>> handleEmailAlreadyExistsException(EmailAlreadyExistsException e) {
+        return new ResponseEntity<>(response(e.getMessage()), HttpStatus.CONFLICT);
     }
 }
