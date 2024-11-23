@@ -27,7 +27,7 @@
 
 ## Run with Docker
 
-- Run `docker build -t ems:1.0` to build the image
+- Run `docker build -t ems:1.0 .` to build the image
 
 - Run `docker run -p {your_port}:8080 ems:1.0` to start the container
 
